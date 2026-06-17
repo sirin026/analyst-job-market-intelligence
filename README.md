@@ -50,34 +50,29 @@ Instead of guessing, I built an end-to-end analysis pipeline — raw data → SQ
 ```
 analyst-job-market-intelligence/
 │
-├── data/
-│   └── cleaned/
-│       ├── linkedin_analyst_clean.csv     # 3,462 analyst job postings (29 columns)
-│       ├── salaries_clean.csv             # 607 salary benchmark records
-│       └── salaries_usd_clean.csv         # USD-normalized salary data
+├── 01_schema.sql                        # SQLite schema + views
+├── 02_analysis_queries.sql              # 8 standalone analysis queries
+├── 02_load_and_query.py                 # Full pipeline: load → query → export CSVs
 │
-├── sql/
-│   ├── 01_schema.sql                      # SQLite schema + views
-│   ├── 02_analysis_queries.sql            # 8 standalone analysis queries
-│   └── 02_load_and_query.py               # Full pipeline: load → query → export CSVs
+├── linkedin_analyst_clean.csv           # 3,462 analyst job postings (29 columns)
+├── salaries_clean.csv                   # 607 salary benchmark records
 │
-├── dashboard/
-│   ├── skill_demand.csv                   # Top skills % demand
-│   ├── jobs_by_state.csv                  # Job count by US state
-│   ├── experience_demand.csv              # Openings by experience level
-│   ├── salary_by_role.csv                 # Avg salary by role category
-│   ├── work_type.csv                      # Full-time / Contract / Remote split
-│   ├── salary_benchmark.csv               # Salary by experience × role
-│   ├── skill_cooccurrence.csv             # Skills that appear together most
-│   ├── top_companies.csv                  # Top hiring companies
-│   └── Analyst_Job_Market_Intelligence_PowerBI.pbix
+├── skill_demand.csv                     # Top skills % demand
+├── jobs_by_state.csv                    # Job count by US state
+├── experience_demand.csv                # Openings by experience level
+├── salary_by_role.csv                   # Avg salary by role category
+├── work_type.csv                        # Full-time / Contract / Remote split
+├── salary_benchmark.csv                 # Salary by experience × role
+├── skill_cooccurrence.csv               # Skills that appear together most
+├── top_companies.csv                    # Top hiring companies
 │
-├── python/
-│   ├── chart1_skill_demand.png            # Horizontal bar: top skills
-│   ├── chart2_jobs_by_state.png           # Choropleth: jobs by state
-│   ├── chart3_salary_by_experience.png    # Grouped bar: salary × experience
-│   ├── chart4_work_type.png               # Donut: work type distribution
-│   └── chart5_salary_by_role.png          # Bar: avg salary by role
+├── chart1_skill_demand.png              # Matplotlib: top skills bar chart
+├── chart2_jobs_by_state.png             # Matplotlib: jobs by state
+├── chart3_salary_by_experience.png      # Matplotlib: salary × experience
+├── chart4_work_type.png                 # Matplotlib: work type donut
+├── chart5_salary_by_role.png            # Matplotlib: salary by role
+├── powerbi_page1_skill_demand.png       # Power BI: Skill Demand page
+├── powerbi_page2_salary_experience.png  # Power BI: Salary by Experience page
 │
 └── README.md
 ```
@@ -109,7 +104,7 @@ GROUP BY experience_level, job_title
 ORDER BY job_title, avg_salary DESC;
 ```
 
-All 8 queries are in [`sql/02_analysis_queries.sql`](sql/02_analysis_queries.sql).
+All 8 queries are in [`02_analysis_queries.sql`](02_analysis_queries.sql).
 
 ---
 
@@ -124,7 +119,7 @@ cd analyst-job-market-intelligence
 pip install pandas matplotlib sqlite3
 
 # 3. Run the full pipeline (loads data → runs queries → exports CSVs)
-python sql/02_load_and_query.py
+python 02_load_and_query.py
 ```
 
 The script will:
@@ -154,10 +149,13 @@ The script will:
 
 Two pages built in Power BI Desktop:
 
-- **Page 1 — Skill Demand:** Clustered horizontal bar showing demand % for each skill across analyst postings
-- **Page 2 — Salary by Experience:** Clustered column comparing Data Analyst, Data Engineer, and Data Scientist salaries at EN / MI / SE levels with a DAX calculated column for experience order
+**Page 1 — Skill Demand**
+![Skill Demand](powerbi_page1_skill_demand.png)
 
-File: [`dashboard/Analyst_Job_Market_Intelligence_PowerBI.pbix`](dashboard/Analyst_Job_Market_Intelligence_PowerBI.pbix)
+**Page 2 — Salary by Experience Level**
+![Salary by Experience](powerbi_page2_salary_experience.png)
+
+File: [`Analyst_Job_Market_Intelligence_PowerBI.pbix`](Analyst_Job_Market_Intelligence_PowerBI.pbix)
 
 ---
 
