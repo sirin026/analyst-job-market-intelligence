@@ -1,0 +1,10 @@
+role_category,job_count,avg_salary_usd,min_salary,max_salary
+Business Analyst,93,110952.0,44658.0,260000.0
+Senior Analyst,122,110119.0,50040.0,216320.0
+Data Analyst,89,103090.0,47840.0,222650.0
+Other Analyst,693,97845.0,33280.0,460000.0
+Financial Analyst,105,96192.0,33280.0,169500.0
+Marketing Analyst,10,88676.0,70000.0,120000.0
+Product Analyst,6,87127.0,54725.0,170560.0
+Supply Chain Analyst,5,82557.0,45760.0,101504.0
+Operations Analyst,33,79500.0,47840.0,124800.0

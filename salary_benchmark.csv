@@ -1,0 +1,14 @@
+experience_level,job_title,avg_salary,records
+SE,Analytics Engineer,195000.0,2
+EX,Analytics Engineer,155000.0,2
+EX,Data Analyst,120000.0,2
+SE,Data Analyst,111923.0,54
+MI,Data Analyst,75973.0,27
+EN,Data Analyst,69011.0,9
+EX,Data Engineer,245500.0,4
+SE,Data Engineer,138843.0,62
+MI,Data Engineer,95875.0,46
+EN,Data Engineer,62324.0,11
+SE,Data Scientist,150832.0,59
+MI,Data Scientist,89796.0,54
+EN,Data Scientist,68851.0,16
